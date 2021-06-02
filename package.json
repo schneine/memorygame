@@ -1,0 +1,24 @@
+{
+  "name": "tastetherainbow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "dependencies": {
+    "@types/mongodb": "^3.5.20",
+    "mongodb": "^3.5.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node Zauberbild/Server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schneine/schneine.github.io-EIA2.git"
+  },
+  "author": "mr.x",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/schneine/schneine.github.io-EIA2/issues"
+  },
+  "homepage": "https://github.com/schneine/schneine.github.io-EIA2#readme"
+}
