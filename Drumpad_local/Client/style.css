@@ -1,0 +1,94 @@
+body{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(250, 248, 248);
+    font-family: Helvetica, sans-serif;
+}
+h1{
+  position: relative;
+  top: 50%;
+  left: 38%;
+  
+
+}
+#Tasten{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;  
+     
+}
+
+.Taste {
+    position: absolute;
+    width: 70px;
+    height: 50px;
+    margin-top: -50px;
+    margin-left: -50px;
+    
+
+}
+
+.Taste[data-index="0"] {
+    top: 0px;
+    left: -75px;
+    background-color: green;
+  }
+  
+  .Taste[data-index="1"] {
+    top: 0px;
+    left: 75px;
+    background-color: red;
+  }
+  
+  .Taste[data-index="2"] {
+    top: 60px;
+    left: -75px;
+    background-color: yellow;
+  }
+  
+  .Taste[data-index="3"] {
+    top: 60px;
+    left: 0px;
+    background-color: orange;
+  }
+  .Taste[data-index="4"] {
+    top: 0px;
+    left: 0px;
+    background-color: rgba(241, 118, 245, 0.589);
+  }
+  .Taste[data-index="5"] {
+    top: 60px;
+    left: 75px;
+    background-color: rgba(247, 94, 153, 0.801);
+  }
+
+  .Taste.active {
+    opacity: 1;
+  }
+  
+  .Taste.hidden {
+    opacity: 0.2;
+  }
+
+
+
+
+.play{
+
+    position: absolute;
+    left: 500px;
+    top: 730px;
+    width: 100px;
+    height: 100px;
+    background-color:black;
+    transition: transform .2s, visibility .2s ease-in;
+    
+}
+.play:hover{
+    transform: scale(1.1);
+}
+
