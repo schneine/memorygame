@@ -12,7 +12,11 @@ for (let button of buttons) {
     }
 startButton.addEventListener("mousedown", () => playRandom([0, 1, 2, 3, 4, 5]));
 
-
+//das Anfangsarray mit allen Tönen in der richtigen Reihenfolge der Melodie erstellen,  die ersten 7 Töne auf beliebige Tasten verteilen
+//und automatisch in der richtigen Tonreihenfolge aufleuchten lassen (Display für Nutzer disabled)
+//Nutzer kann Tasten nachdrücken, vergleich ob die 7 aufgeleuchteten Tasten mit den gedrückten Tasten des Nutzers übereinstimmen 
+//wenn ja dann Töne in Ergebnisarry pushen und aus anfangsarray löschen, wenn falsch dann aus anfangsarray löschen 
+//und in Ergebnisarray stille hinzufügen, wenn das Anfangsarray leer ist dann soll ergebnisarray abgespielt werden
 
 
 /*window.addEventListener("load", function(){
