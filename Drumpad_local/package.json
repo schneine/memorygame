@@ -14,5 +14,11 @@
   "devDependencies": {
     "@types/node": "^15.6.2",
     "@types/ws": "^7.4.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schneine/schneine.github.io-EIA2.git"
+  },
+  "homepage": "https://github.com/schneine/schneine.github.io-EIA2#readme"
+  
 }

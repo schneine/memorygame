@@ -10,27 +10,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 window.addEventListener("load", function () {
     const startButton = document.getElementById("start");
     const buttons = document.querySelectorAll(".Taste");
+    let buttonsPressed = [];
+    let buttonOrder = [];
+    let url = "https://guessalong.herokuapp.com";
     console.log(buttons.length);
     for (let button of buttons) {
         button.addEventListener("mousedown", onButton);
         console.log("adding");
     }
-    startButton.addEventListener("mousedown", () => playRandom([0, 1, 2, 3, 4, 5]));
-    /*window.addEventListener("load", function(){
-        document.querySelector(".box1").addEventListener("mousedown", function(){playSample("A.mp3");});
-        document.querySelector(".box2").addEventListener("mousedown", function(){playSample("F.mp3");});
-        document.querySelector(".box3").addEventListener("mousedown", function(){playSample("hihat.mp3");});
-        document.querySelector(".box4").addEventListener("mousedown", function(){playSample("kick.mp3");});
-        document.querySelector(".box5").addEventListener("mousedown", function(){playSample("C.mp3");});
-        document.querySelector(".box6").addEventListener("mousedown", function(){playSample("laugh-1.mp3");});
-        document.querySelector(".box7").addEventListener("mousedown", function(){playSample("G.mp3");});
-        document.querySelector(".box8").addEventListener("mousedown", function(){playSample("snare.mp3");});
-        document.querySelector(".box9").addEventListener("mousedown", function(){playSample("laugh-2.mp3");});
-        document.getElementById("#Tasten").addEventListener("mousedown", onButton);
-    });*/
-    function playSample(theMP3) {
-        var sound = new Audio("assets/" + theMP3);
+    startButton.addEventListener("mousedown", () => {
+        randomButtonOrder(5);
+        console.log(buttonOrder);
+        playRandom(buttonOrder);
+    });
+    //das Anfangsarray mit allen Tönen in der richtigen Reihenfolge der Melodie erstellen,  die ersten 7 Töne auf beliebige Tasten verteilen
+    //und automatisch in der richtigen Tonreihenfolge aufleuchten lassen (Display für Nutzer disabled)
+    //Nutzer kann Tasten nachdrücken, vergleich ob die 7 aufgeleuchteten Tasten mit den gedrückten Tasten des Nutzers übereinstimmen 
+    //wenn ja dann Töne in Ergebnisarry pushen und aus anfangsarray löschen, wenn falsch dann aus anfangsarray löschen 
+    //und in Ergebnisarray stille hinzufügen, wenn das Anfangsarray leer ist dann soll ergebnisarray abgespielt werden
+    function playSound(song, counter) {
+        var sound = new Audio("../assets/" + song + "/Marker" + counter + ".mp3");
+        console.log("sound");
         sound.play();
+    }
+    function randomButtonOrder(n) {
+        for (let i = 0; i < n; i++) {
+            while (true) {
+                let value = Math.floor(Math.random() * (6));
+                if (i == 0 || (i > 0 && value != buttonOrder[i - 1])) {
+                    buttonOrder.push(value);
+                    break;
+                }
+            }
+        }
     }
     function automaticButton(index) {
         const target = buttons.item(index);
@@ -43,18 +55,51 @@ window.addEventListener("load", function () {
         }, 200);
     }
     function onButton(evt) {
-        const target = evt.target;
-        const index = parseInt(target.dataset.index);
-        console.log("pressed Button");
-        // highlight button
-        target.classList.remove("hidden");
-        target.classList.add("active");
-        console.log(target.classList);
-        setTimeout(() => {
-            target.classList.remove("active");
-            target.classList.add("hidden");
-        }, 200);
-        //evt.preventDefault(); // prevent mousedown emulation with iOS touch
+        if (buttonsPressed.length >= buttonOrder.length) {
+            console.log("finished pressing");
+        }
+        else {
+            const target = evt.target;
+            const index = parseInt(target.dataset.index);
+            buttonsPressed.push(index);
+            let numberOfPressedButtons = buttonsPressed.length;
+            if (index == buttonOrder[numberOfPressedButtons - 1]) { //is the value of the button pressed (index) the same like given Order
+                playSound("mamma_mia", numberOfPressedButtons);
+            }
+            console.log("pressed Button" + index);
+            // highlight button
+            target.classList.remove("hidden");
+            target.classList.add("active");
+            console.log(target.classList);
+            setTimeout(() => {
+                target.classList.remove("active");
+                target.classList.add("hidden");
+            }, 200);
+            if (buttonsPressed.length >= buttonOrder.length) {
+                endOfTurn();
+            }
+            //evt.preventDefault(); // prevent mousedown emulation with iOS touch
+        }
+    }
+    function arrayEquals(a, b) {
+        if (a.length != b.length) {
+            return false; //wenn die Länge nicht gleich ist, dann kann es schon nicht gleich sein
+        }
+        else {
+            return a.every(function (value, index) {
+                return value == b[index];
+            });
+        }
+    }
+    function endOfTurn() {
+        console.log(buttonsPressed);
+        console.log(buttonOrder);
+        if (arrayEquals(buttonsPressed, buttonOrder)) {
+            console.log("correctOrder");
+        }
+        else {
+            console.log("incorrectOrder");
+        }
     }
     function playRandom(order) {
         return __awaiter(this, void 0, void 0, function* () {
