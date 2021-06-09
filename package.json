@@ -2,7 +2,7 @@
   "name": "drumpad_local",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "start": "node Drumpad_local/Server/server.js"
   },
