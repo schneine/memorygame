@@ -13,5 +13,5 @@ const counters: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 server.on("connection", (socket) => {
   console.log("connected");
-  console.log("hello");
+  console.log("hello world");
 });
