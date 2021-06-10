@@ -15,7 +15,7 @@ for (let button of buttons) {
     console.log("adding");
     }
 startButton.addEventListener("mousedown", () => {
-    randomButtonOrder(5);
+    randomButtonOrder(7);
     console.log(buttonOrder);
     playRandom(buttonOrder);
     
@@ -27,7 +27,8 @@ startButton.addEventListener("mousedown", () => {
 //wenn ja dann Töne in Ergebnisarry pushen und aus anfangsarray löschen, wenn falsch dann aus anfangsarray löschen 
 //und in Ergebnisarray stille hinzufügen, wenn das Anfangsarray leer ist dann soll ergebnisarray abgespielt werden
 
-
+//Durch Server kommunizieren welche Töne richtig oder falsch gespielt wurden (evtll. über String mit Tonnamen die richtig gespielt wurden)
+//Nach Melodieende die richtigen Töne für alle Spieler abspielen
 
 function playSound(song: string, counter: number): void {
     var sound:HTMLAudioElement = new Audio("../assets/" + song + "/Marker" + counter + ".mp3");
