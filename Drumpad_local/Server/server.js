@@ -17,9 +17,9 @@ server.on("connection", (socket) => {
     else {
         console.log("too many users");
     }
-    server.on("message", data => {
+    socket.on("message", data => {
         console.log(data);
-        socket.send(data.toUpperCase());
+        socket.send(data.toString().toUpperCase());
     });
 });
 //# sourceMappingURL=server.js.map
