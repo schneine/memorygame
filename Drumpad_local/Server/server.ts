@@ -32,7 +32,9 @@ server.on("connection", (socket) => {
   }
   socket.on("message", data => {
     console.log(data);
-    socket.send(data.toString().toUpperCase());
+    player1.send(data.toString().toUpperCase());
+    player2.send(data.toString().toUpperCase());
+
     
   });
   
