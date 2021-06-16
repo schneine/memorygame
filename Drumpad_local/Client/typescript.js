@@ -13,7 +13,7 @@ window.addEventListener("load", function () {
     let buttonsPressed = [];
     let buttonOrder = [];
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
-    //socket.send(JSON.stringify("hello world"));
+    socket.send(JSON.stringify("hello world"));
     console.log(buttons.length);
     for (let button of buttons) {
         button.addEventListener("mousedown", onButton);

@@ -7,7 +7,7 @@ const buttons: NodeListOf<HTMLDivElement> = document.querySelectorAll(".Taste");
 let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
-//socket.send(JSON.stringify("hello world"));
+socket.send(JSON.stringify("hello world"));
 console.log(buttons.length);
 
 for (let button of buttons) {
