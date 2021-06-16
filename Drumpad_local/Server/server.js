@@ -27,8 +27,12 @@ server.on("connection", (socket) => {
     }
     socket.on("message", data => {
         console.log(data);
-        player1.send(data.toString().toUpperCase());
-        player2.send(data.toString().toUpperCase());
+        if (player1 != null) {
+            player1.send(data.toString().toUpperCase());
+        }
+        if (player2 != null) {
+            player2.send(data.toString().toUpperCase());
+        }
     });
 });
 //# sourceMappingURL=server.js.map
