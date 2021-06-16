@@ -13,6 +13,7 @@ server.on("connection", (socket) => {
     console.log("hello world");
     if (counter <= 2) {
         counter++;
+        console.log("one user more", counter);
     }
     else {
         console.log("too many users");
