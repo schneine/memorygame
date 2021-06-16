@@ -14,7 +14,7 @@ let counter: number = 0;
 server.on("connection", (socket) => {
   console.log("connected");
   console.log("hello world");
-  if (counter <= 2) {
+  if (counter < 2) {
     counter ++;
     console.log("one user more", counter);
   }
