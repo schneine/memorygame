@@ -10,7 +10,6 @@ const clientSockets = new Set();
 let counter = 0;
 server.on("connection", (socket) => {
     console.log("connected");
-    console.log("hello world");
     if (counter < 2) {
         counter++;
         console.log("one user more", counter);
@@ -18,5 +17,9 @@ server.on("connection", (socket) => {
     else {
         console.log("too many users");
     }
+    server.on("message", data => {
+        console.log(data);
+        socket.send(data.toUpperCase());
+    });
 });
 //# sourceMappingURL=server.js.map

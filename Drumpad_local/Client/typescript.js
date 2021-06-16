@@ -14,6 +14,9 @@ window.addEventListener("load", function () {
     let buttonOrder = [];
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
     socket.onopen = function () { socket.send(JSON.stringify("hello world")); };
+    socket.onmessage = function (event) {
+        console.log(event.data);
+    };
     console.log(buttons.length);
     for (let button of buttons) {
         button.addEventListener("mousedown", onButton);

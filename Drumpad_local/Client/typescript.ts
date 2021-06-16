@@ -8,6 +8,9 @@ let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
 socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
+socket.onmessage = function (event: MessageEvent): void {
+    console.log(event.data);
+};
 console.log(buttons.length);
 
 for (let button of buttons) {
