@@ -7,9 +7,15 @@ const server = new WebSocket.Server({ port: port });
 // set of connected sockets
 const clientSockets = new Set();
 // init counters (0 is number of connected clients)
-const counters = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let counter = 0;
 server.on("connection", (socket) => {
     console.log("connected");
     console.log("hello world");
+    if (counter <= 2) {
+        counter++;
+    }
+    else {
+        console.log("too many users");
+    }
 });
 //# sourceMappingURL=server.js.map
