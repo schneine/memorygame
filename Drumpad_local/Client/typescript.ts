@@ -138,6 +138,7 @@ function endOfTurn(): void {
 
 
     }
+    socket.send("player finished");
 
 }
 

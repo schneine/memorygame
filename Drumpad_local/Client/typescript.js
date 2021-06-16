@@ -106,6 +106,7 @@ window.addEventListener("load", function () {
         else {
             console.log("incorrectOrder");
         }
+        socket.send("player finished");
     }
     function playRandom(order) {
         return __awaiter(this, void 0, void 0, function* () {
