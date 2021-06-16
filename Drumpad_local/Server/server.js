@@ -10,6 +10,14 @@ let player1 = null;
 let player2 = null;
 // init counters (0 is number of connected clients)
 let counter = 0;
+function broadcast(message) {
+    if (player1 != null) {
+        player1.send(message.toUpperCase());
+    }
+    if (player2 != null) {
+        player2.send(message.toUpperCase());
+    }
+}
 server.on("connection", (socket) => {
     console.log("connected");
     if (counter < 2) {
@@ -27,12 +35,8 @@ server.on("connection", (socket) => {
     }
     socket.on("message", data => {
         console.log(data);
-        if (player1 != null) {
-            player1.send(data.toString().toUpperCase());
-        }
-        if (player2 != null) {
-            player2.send(data.toString().toUpperCase());
-        }
+        broadcast(data.toString());
     });
+    setInterval(() => broadcast("hello how are you?"), 5000);
 });
 //# sourceMappingURL=server.js.map

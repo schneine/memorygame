@@ -13,7 +13,15 @@ let player2: WebSocket = null;
 // init counters (0 is number of connected clients)
 let counter: number = 0;
 
-
+function broadcast(message: string): void {
+  if (player1 != null) {
+    player1.send(message.toUpperCase());
+  }
+  
+  if (player2 != null) {
+player2.send(message.toUpperCase());   
+} 
+}
 
 server.on("connection", (socket) => {
   console.log("connected");
@@ -32,14 +40,11 @@ server.on("connection", (socket) => {
   }
   socket.on("message", data => {
     console.log(data);
-    if (player1 != null) {
-      player1.send(data.toString().toUpperCase());
-    }
+    broadcast(data.toString());
     
-    if (player2 != null) {
-  player2.send(data.toString().toUpperCase());   
-  }    
+});
 
-  });
-  
+
+setInterval(() => broadcast("hello how are you?"), 5000);
+
 });
