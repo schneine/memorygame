@@ -66,7 +66,7 @@ function automaticButton(index: number): void {
         target.classList.remove("active");
         target.classList.add("hidden");
 
-    } , 200);
+    } ,        200);
 }
 
 function onButton(evt: Event): void {
@@ -99,7 +99,7 @@ function onButton(evt: Event): void {
             target.classList.add("hidden");
     
         } 
-        ,200);
+        ,          200);
         
         if (buttonsPressed.length >= buttonOrder.length) {
             endOfTurn();
@@ -139,11 +139,25 @@ function endOfTurn(): void {
 
     }
     socket.send("player finished");
+    socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
+    console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
 
 }
 
 
-
+function correctKeys (a: number [], b: number []): boolean [] {
+let difference: boolean [] = [];
+if (a.length != b.length) {
+        //return false;                                         
+    }
+    else {
+        a.every(function(value: number, index: number): void {   //wenn die Länge gleich ist, dann untersuchen ob die gleichen Tasten gedrückt wurden
+           difference[index] = value == b [index]; 
+        });
+        
+    }
+return difference;
+}
 
 
 async function playRandom(order: number[]): Promise<void> {

@@ -107,6 +107,20 @@ window.addEventListener("load", function () {
             console.log("incorrectOrder");
         }
         socket.send("player finished");
+        socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
+        console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
+    }
+    function correctKeys(a, b) {
+        let difference = [];
+        if (a.length != b.length) {
+            //return false;                                         
+        }
+        else {
+            a.every(function (value, index) {
+                difference[index] = value == b[index];
+            });
+        }
+        return difference;
     }
     function playRandom(order) {
         return __awaiter(this, void 0, void 0, function* () {
