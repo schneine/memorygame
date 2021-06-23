@@ -14,10 +14,10 @@ let currentPlayer = -1;
 let results = [];
 function broadcast(message) {
     if (player1 != null) {
-        player1.send(message.toUpperCase());
+        player1.send(message);
     }
     if (player2 != null) {
-        player2.send(message.toUpperCase());
+        player2.send(message);
     }
 }
 function startGame() {
@@ -76,6 +76,10 @@ server.on("connection", (socket) => {
                 player2.send(results.length + "play");
                 player1.send("wait");
             }
+        }
+        else if (data == "End") {
+            broadcast("End");
+            broadcast(JSON.stringify(results));
         }
         else {
             try {

@@ -9,6 +9,7 @@ let currentlyPlaying: boolean = false;
 let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
 let numberOfButtons: number = 4;
+let songLength: number = 20;
 let startingPart: number = 0;
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
 socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
@@ -19,6 +20,17 @@ socket.onmessage = function (event: MessageEvent): void {
     currentlyPlaying = true;
     startingPart = parseInt(event.data, 10);
     console.log(startingPart);
+    }
+
+    else {
+        try {
+            let response: boolean [] = JSON.parse(event.data.toString());   //can we extract an array send from server
+            console.log(response);
+            playWholeMelody(response);
+    
+          } catch (e) {
+          console.log("couldnt parse");
+          }
     }
 };
 console.log(buttons.length);
@@ -61,21 +73,43 @@ function playSound(song: string, counter: number): void {
 function randomButtonOrder(n: number): void {
     buttonOrder = [];
     buttonsPressed = [];
-    for (let i: number = 0; i < n; i++) {
-        while (true) {
-            let value: number = Math.floor(Math.random() * (6));
-            if (i == 0 || (i > 0 && value != buttonOrder[i - 1])) {
-                buttonOrder.push(value);
-                break;
+
+    if (startingPart + n > songLength) { 
+        n = songLength - startingPart;
+    }
+    if (n > 0) {
+        for (let i: number = 0; i < n; i++) {
+            while (true) {
+                let value: number = Math.floor(Math.random() * (6));
+                if (i == 0 || (i > 0 && value != buttonOrder[i - 1])) {
+                    buttonOrder.push(value);
+                    break;
+                }
             }
         }
+
+    } else {
+        socket.send("End");
     }
+    
     console.log(buttonOrder.length + "/" + n);
 }
 
 
+function playWholeMelody(a: boolean []): void {
+    for (let i: number = 0; i <= a.length; i++) {
+     if (a[i] == true) {
+     startingPart = 0;
+     playSound("mamma mia", i);
+} else {
+    setTimeout(() => {
+        console.log("pause");
 
-
+    } 
+    ,          200);
+}
+    }
+}
 
 function automaticButton(index: number): void {
     const target: HTMLElement = <HTMLElement>buttons.item(index);
