@@ -5,6 +5,7 @@ window.addEventListener("load", function(): void {
 const startButton: HTMLElement = document.getElementById("start");
 const playerMessage: HTMLElement = document.getElementById("playermessage");
 const buttons: NodeListOf<HTMLDivElement> = document.querySelectorAll(".Taste");
+let currentlyPlaying: boolean = false;
 let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
@@ -13,11 +14,7 @@ socket.onmessage = function (event: MessageEvent): void {
     console.log(event.data);
     if (event.data == "play") {
     playerMessage.innerHTML = "It's your turn";
-    startButton.style.display = "block";
-    }
-    else if (event.data == "wait") {
-    startButton.style.display = "none";
-    console.log("waiting");
+    currentlyPlaying = true;
     }
 };
 console.log(buttons.length);
@@ -27,10 +24,15 @@ for (let button of buttons) {
     console.log("adding");
     }
 startButton.addEventListener("mousedown", () => {
-    randomButtonOrder(4);
-    console.log(buttonOrder);
-    playRandom(buttonOrder);
-    
+    if (currentlyPlaying) {
+        randomButtonOrder(4);
+        console.log(buttonOrder);
+        playRandom(buttonOrder);
+        currentlyPlaying = false;
+    }
+    else {
+        console.log("not your turn");
+    }
 } );
 
 //für jeden Client ein neuen WebSocket kreieren (nur 2 Clients on connection möglich)

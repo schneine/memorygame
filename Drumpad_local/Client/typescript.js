@@ -11,6 +11,7 @@ window.addEventListener("load", function () {
     const startButton = document.getElementById("start");
     const playerMessage = document.getElementById("playermessage");
     const buttons = document.querySelectorAll(".Taste");
+    let currentlyPlaying = false;
     let buttonsPressed = [];
     let buttonOrder = [];
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
@@ -19,11 +20,7 @@ window.addEventListener("load", function () {
         console.log(event.data);
         if (event.data == "play") {
             playerMessage.innerHTML = "It's your turn";
-            startButton.style.display = "block";
-        }
-        else if (event.data == "wait") {
-            startButton.style.display = "none";
-            console.log("waiting");
+            currentlyPlaying = true;
         }
     };
     console.log(buttons.length);
@@ -32,9 +29,15 @@ window.addEventListener("load", function () {
         console.log("adding");
     }
     startButton.addEventListener("mousedown", () => {
-        randomButtonOrder(4);
-        console.log(buttonOrder);
-        playRandom(buttonOrder);
+        if (currentlyPlaying) {
+            randomButtonOrder(4);
+            console.log(buttonOrder);
+            playRandom(buttonOrder);
+            currentlyPlaying = false;
+        }
+        else {
+            console.log("not your turn");
+        }
     });
     //für jeden Client ein neuen WebSocket kreieren (nur 2 Clients on connection möglich)
     //durch Server kommunizieren wer anfängt und welcher Spieler dran ist
