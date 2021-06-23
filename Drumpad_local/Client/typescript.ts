@@ -16,7 +16,8 @@ socket.onmessage = function (event: MessageEvent): void {
     startButton.style.display = "block";
     }
     else if (event.data == "wait") {
-        startButton.style.display = "none";
+    startButton.style.display = "none";
+    console.log("waiting");
     }
 };
 console.log(buttons.length);

@@ -23,6 +23,7 @@ window.addEventListener("load", function () {
         }
         else if (event.data == "wait") {
             startButton.style.display = "none";
+            console.log("waiting");
         }
     };
     console.log(buttons.length);
