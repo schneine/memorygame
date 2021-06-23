@@ -94,7 +94,7 @@ window.addEventListener("load", function () {
                 startingPart = 0;
                 setTimeout(() => {
                     playSound("mamma_mia", i, true);
-                }, 500);
+                }, 2000);
             }
             else {
                 setTimeout(() => {

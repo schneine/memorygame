@@ -102,7 +102,7 @@ function playWholeMelody(a: boolean []): void {
      startingPart = 0;
      setTimeout(() => {
         playSound("mamma_mia", i, true);
-     }, 500);
+     }, 2000);
      
 } else {
     setTimeout(() => {
