@@ -13,6 +13,7 @@ let player2: WebSocket = null;
 // init counters (0 is number of connected clients)
 
 let gameStarted: boolean = false; 
+let currentPlayer: number = -1;
 
 function broadcast(message: string): void {
   if (player1 != null) {
@@ -22,6 +23,16 @@ function broadcast(message: string): void {
   if (player2 != null) {
 player2.send(message.toUpperCase());   
 } 
+}
+
+function startGame(): void {
+  currentPlayer = Math.floor(Math.random()) + 1;
+  if (currentPlayer == 1 ) {
+    player1.send("play");
+  }
+  else {
+    player2.send("play");
+  }
 }
 
 server.on("connection", (socket) => {
@@ -39,6 +50,7 @@ server.on("connection", (socket) => {
       player2 = socket;
       playerNumber = 2;
       gameStarted = true; 
+      startGame();
   }
   else {
       console.log("too many users");

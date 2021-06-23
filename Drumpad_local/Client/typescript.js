@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 window.addEventListener("load", function () {
     const startButton = document.getElementById("start");
+    const playerMessage = document.getElementById("playermessage");
     const buttons = document.querySelectorAll(".Taste");
     let buttonsPressed = [];
     let buttonOrder = [];
@@ -16,6 +17,12 @@ window.addEventListener("load", function () {
     socket.onopen = function () { socket.send(JSON.stringify("hello world")); };
     socket.onmessage = function (event) {
         console.log(event.data);
+        if (event.data == "play") {
+            randomButtonOrder(7);
+            console.log(buttonOrder);
+            playRandom(buttonOrder);
+            playerMessage.innerHTML = "It's your turn";
+        }
     };
     console.log(buttons.length);
     for (let button of buttons) {
@@ -105,6 +112,7 @@ window.addEventListener("load", function () {
             console.log("incorrectOrder");
         }
         socket.send("player finished");
+        playerMessage.innerHTML = "now it's the other players turn";
         socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
         console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
     }

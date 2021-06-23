@@ -3,6 +3,7 @@
 window.addEventListener("load", function(): void { 
 
 const startButton: HTMLElement = document.getElementById("start");
+const playerMessage: HTMLElement = document.getElementById("playermessage");
 const buttons: NodeListOf<HTMLDivElement> = document.querySelectorAll(".Taste");
 let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
@@ -10,6 +11,12 @@ let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
 socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
 socket.onmessage = function (event: MessageEvent): void {
     console.log(event.data);
+    if (event.data == "play") {
+    randomButtonOrder(7);
+    console.log(buttonOrder);
+    playRandom(buttonOrder);
+    playerMessage.innerHTML = "It's your turn";
+    }
 };
 console.log(buttons.length);
 
@@ -136,6 +143,7 @@ function endOfTurn(): void {
 
     }
     socket.send("player finished");
+    playerMessage.innerHTML = "now it's the other players turn";
     socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
     console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
 

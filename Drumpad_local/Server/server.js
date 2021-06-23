@@ -10,12 +10,22 @@ let player1 = null;
 let player2 = null;
 // init counters (0 is number of connected clients)
 let gameStarted = false;
+let currentPlayer = -1;
 function broadcast(message) {
     if (player1 != null) {
         player1.send(message.toUpperCase());
     }
     if (player2 != null) {
         player2.send(message.toUpperCase());
+    }
+}
+function startGame() {
+    currentPlayer = Math.floor(Math.random()) + 1;
+    if (currentPlayer == 1) {
+        player1.send("play");
+    }
+    else {
+        player2.send("play");
     }
 }
 server.on("connection", (socket) => {
@@ -31,6 +41,7 @@ server.on("connection", (socket) => {
         player2 = socket;
         playerNumber = 2;
         gameStarted = true;
+        startGame();
     }
     else {
         console.log("too many users");
