@@ -21,7 +21,7 @@ window.addEventListener("load", function () {
             playerMessage.innerHTML = "It's your turn";
             startButton.style.display = "block";
         }
-        else {
+        else if (event.data == "wait") {
             startButton.style.display = "none";
         }
     };

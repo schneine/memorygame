@@ -23,9 +23,11 @@ function startGame() {
     currentPlayer = Math.floor(Math.random()) + 1;
     if (currentPlayer == 1) {
         player1.send("play");
+        player2.send("wait");
     }
     else {
         player2.send("play");
+        player1.send("wait");
     }
 }
 server.on("connection", (socket) => {
@@ -65,9 +67,11 @@ server.on("connection", (socket) => {
             currentPlayer = currentPlayer == 1 ? 2 : 1; //changing the player
             if (currentPlayer == 1) {
                 player1.send("play");
+                player2.send("wait");
             }
             else {
                 player2.send("play");
+                player1.send("wait");
             }
         }
     });
