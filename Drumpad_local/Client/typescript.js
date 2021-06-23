@@ -27,13 +27,11 @@ window.addEventListener("load", function () {
         console.log(buttonOrder);
         playRandom(buttonOrder);
     });
-    //das Anfangsarray mit allen Tönen in der richtigen Reihenfolge der Melodie erstellen,  die ersten 7 Töne auf beliebige Tasten verteilen
-    //und automatisch in der richtigen Tonreihenfolge aufleuchten lassen (Display für Nutzer disabled)
-    //Nutzer kann Tasten nachdrücken, vergleich ob die 7 aufgeleuchteten Tasten mit den gedrückten Tasten des Nutzers übereinstimmen 
-    //wenn ja dann Töne in Ergebnisarry pushen und aus anfangsarray löschen, wenn falsch dann aus anfangsarray löschen 
-    //und in Ergebnisarray stille hinzufügen, wenn das Anfangsarray leer ist dann soll ergebnisarray abgespielt werden
-    //Durch Server kommunizieren welche Töne richtig oder falsch gespielt wurden (evtll. über String mit Tonnamen die richtig gespielt wurden)
-    //Nach Melodieende die richtigen Töne für alle Spieler abspielen
+    //für jeden Client ein neuen WebSocket kreieren (nur 2 Clients on connection möglich)
+    //durch Server kommunizieren wer anfängt und welcher Spieler dran ist
+    //Durch Server kommunizieren welche Töne richtig oder falsch gespielt wurden (über booelan array [true, true, false, false,true])
+    //Spieler spielen abwechselnd 5 Töne bis Melodie fertig ist
+    //Nach Melodieende nur die richtigen Töne für alle Spieler abspielen
     function playSound(song, counter) {
         var sound = new Audio("../assets/" + song + "/Marker" + counter + ".mp3");
         console.log("sound");
@@ -116,7 +114,7 @@ window.addEventListener("load", function () {
             //return false;                                         
         }
         else {
-            a.every(function (value, index) {
+            a.forEach(function (value, index) {
                 difference[index] = value == b[index];
             });
         }

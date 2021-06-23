@@ -39,10 +39,12 @@ server.on("connection", (socket) => {
         if (playerNumber == 1) {
             console.log("player1 disconnected");
             player1 = null;
+            gameStarted = false;
         }
         else if (playerNumber == 2) {
             console.log("player2 disconnected");
             player2 = null;
+            gameStarted = false;
         }
     });
     socket.on("message", data => {

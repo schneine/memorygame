@@ -148,7 +148,7 @@ if (a.length != b.length) {
         //return false;                                         
     }
     else {
-        a.every(function(value: number, index: number): void {   //wenn die Länge gleich ist, dann untersuchen ob die gleichen Tasten gedrückt wurden
+        a.forEach(function(value: number, index: number): void {   
            difference[index] = value == b [index]; 
         });
         
