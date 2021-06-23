@@ -28,11 +28,15 @@ for (let button of buttons) {
     console.log("adding");
     }
 startButton.addEventListener("mousedown", () => {
+    
     if (currentlyPlaying) {
+        buttonOrder = [];
+        buttonsPressed = [];
         randomButtonOrder(numberOfButtons);
         console.log(buttonOrder);
         playRandom(buttonOrder);
         currentlyPlaying = false;
+        
     }
     else {
         console.log("not your turn");
@@ -55,6 +59,8 @@ function playSound(song: string, counter: number): void {
 }
 
 function randomButtonOrder(n: number): void {
+    buttonOrder = [];
+    buttonsPressed = [];
     for (let i: number = 0; i < n; i++) {
         while (true) {
             let value: number = Math.floor(Math.random() * (6));

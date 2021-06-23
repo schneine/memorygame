@@ -34,6 +34,8 @@ window.addEventListener("load", function () {
     }
     startButton.addEventListener("mousedown", () => {
         if (currentlyPlaying) {
+            buttonOrder = [];
+            buttonsPressed = [];
             randomButtonOrder(numberOfButtons);
             console.log(buttonOrder);
             playRandom(buttonOrder);
@@ -55,6 +57,8 @@ window.addEventListener("load", function () {
         sound.play();
     }
     function randomButtonOrder(n) {
+        buttonOrder = [];
+        buttonsPressed = [];
         for (let i = 0; i < n; i++) {
             while (true) {
                 let value = Math.floor(Math.random() * (6));
