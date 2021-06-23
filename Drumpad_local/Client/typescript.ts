@@ -69,10 +69,11 @@ function randomButtonOrder(n: number): void {
                 break;
             }
         }
-        
-        
     }
+    console.log(buttonOrder.length + "/" + n);
 }
+
+
 
 
 
@@ -90,7 +91,6 @@ function automaticButton(index: number): void {
 
 function onButton(evt: Event): void {
     if (buttonsPressed.length >= buttonOrder.length) {
-        console.log("finished pressing");
        
     }
     else {
@@ -112,7 +112,6 @@ function onButton(evt: Event): void {
         // highlight button
         target.classList.remove("hidden");
         target.classList.add("active");
-        console.log(target.classList);
         setTimeout(() => {
             target.classList.remove("active");
             target.classList.add("hidden");
@@ -144,9 +143,6 @@ function arrayEquals(a: number [], b: number []): boolean {    //untersucht ob g
 }
 
 function endOfTurn(): void {
-
-    console.log(buttonsPressed);
-    console.log(buttonOrder);
     
     
     if (arrayEquals(buttonsPressed, buttonOrder)) {
@@ -161,7 +157,7 @@ function endOfTurn(): void {
     playerMessage.innerHTML = "now it's the other players turn";
     socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
     socket.send("player finished");
-    console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
+    //console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
 
 }
 

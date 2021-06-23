@@ -68,6 +68,7 @@ window.addEventListener("load", function () {
                 }
             }
         }
+        console.log(buttonOrder.length + "/" + n);
     }
     function automaticButton(index) {
         const target = buttons.item(index);
@@ -81,7 +82,6 @@ window.addEventListener("load", function () {
     }
     function onButton(evt) {
         if (buttonsPressed.length >= buttonOrder.length) {
-            console.log("finished pressing");
         }
         else {
             const target = evt.target;
@@ -95,7 +95,6 @@ window.addEventListener("load", function () {
             // highlight button
             target.classList.remove("hidden");
             target.classList.add("active");
-            console.log(target.classList);
             setTimeout(() => {
                 target.classList.remove("active");
                 target.classList.add("hidden");
@@ -117,8 +116,6 @@ window.addEventListener("load", function () {
         }
     }
     function endOfTurn() {
-        console.log(buttonsPressed);
-        console.log(buttonOrder);
         if (arrayEquals(buttonsPressed, buttonOrder)) {
             console.log("correctOrder");
         }
@@ -128,7 +125,7 @@ window.addEventListener("load", function () {
         playerMessage.innerHTML = "now it's the other players turn";
         socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
         socket.send("player finished");
-        console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
+        //console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
     }
     function correctKeys(a, b) {
         let difference = [];
