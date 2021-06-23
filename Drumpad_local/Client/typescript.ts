@@ -29,7 +29,7 @@ socket.onmessage = function (event: MessageEvent): void {
             playWholeMelody(response);
     
           } catch (e) {
-          console.log("couldnt parse");
+          
           }
     }
 };
@@ -100,7 +100,7 @@ function playWholeMelody(a: boolean []): void {
     for (let i: number = 0; i <= a.length; i++) {
      if (a[i] == true) {
      startingPart = 0;
-     playSound("mamma mia", i);
+     playSound("mamma_mia", i);
 } else {
     setTimeout(() => {
         console.log("pause");

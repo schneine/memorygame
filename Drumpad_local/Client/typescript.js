@@ -34,7 +34,6 @@ window.addEventListener("load", function () {
                 playWholeMelody(response);
             }
             catch (e) {
-                console.log("couldnt parse");
             }
         }
     };
@@ -93,7 +92,7 @@ window.addEventListener("load", function () {
         for (let i = 0; i <= a.length; i++) {
             if (a[i] == true) {
                 startingPart = 0;
-                playSound("mamma mia", i);
+                playSound("mamma_mia", i);
             }
             else {
                 setTimeout(() => {
