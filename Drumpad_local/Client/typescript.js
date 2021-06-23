@@ -15,7 +15,7 @@ window.addEventListener("load", function () {
     let buttonsPressed = [];
     let buttonOrder = [];
     let numberOfButtons = 4;
-    let songLength = 20;
+    let songLength = 8;
     let startingPart = 0;
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
     socket.onopen = function () { socket.send(JSON.stringify("hello world")); };
@@ -60,8 +60,8 @@ window.addEventListener("load", function () {
     //Durch Server kommunizieren welche Töne richtig oder falsch gespielt wurden (über booelan array [true, true, false, false,true])
     //Spieler spielen abwechselnd 5 Töne bis Melodie fertig ist
     //Nach Melodieende nur die richtigen Töne für alle Spieler abspielen
-    function playSound(song, counter) {
-        let index = counter + startingPart;
+    function playSound(song, counter, fromStart) {
+        let index = fromStart ? counter : counter + startingPart;
         var sound = new Audio("../assets/" + song + "/Marker" + index + ".mp3");
         console.log("sound");
         sound.play();
@@ -92,7 +92,7 @@ window.addEventListener("load", function () {
         for (let i = 0; i <= a.length; i++) {
             if (a[i] == true) {
                 startingPart = 0;
-                playSound("mamma_mia", i);
+                playSound("mamma_mia", i, true);
             }
             else {
                 setTimeout(() => {
@@ -120,7 +120,7 @@ window.addEventListener("load", function () {
             buttonsPressed.push(index);
             let numberOfPressedButtons = buttonsPressed.length;
             if (index == buttonOrder[numberOfPressedButtons - 1]) { //is the value of the button pressed (index) the same like given Order
-                playSound("mamma_mia", numberOfPressedButtons);
+                playSound("mamma_mia", numberOfPressedButtons, false);
             }
             console.log("pressed Button" + index);
             // highlight button

@@ -9,7 +9,7 @@ let currentlyPlaying: boolean = false;
 let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
 let numberOfButtons: number = 4;
-let songLength: number = 20;
+let songLength: number = 8;
 let startingPart: number = 0;
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
 socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
@@ -61,8 +61,8 @@ startButton.addEventListener("mousedown", () => {
 //Spieler spielen abwechselnd 5 Töne bis Melodie fertig ist
 //Nach Melodieende nur die richtigen Töne für alle Spieler abspielen
 
-function playSound(song: string, counter: number): void {
-    let index: number = counter + startingPart;
+function playSound(song: string, counter: number, fromStart: boolean): void {
+    let index: number = fromStart ? counter : counter + startingPart;
     var sound: HTMLAudioElement = new Audio("../assets/" + song + "/Marker" + index + ".mp3");
     console.log("sound");
     sound.play();
@@ -100,7 +100,7 @@ function playWholeMelody(a: boolean []): void {
     for (let i: number = 0; i <= a.length; i++) {
      if (a[i] == true) {
      startingPart = 0;
-     playSound("mamma_mia", i);
+     playSound("mamma_mia", i, true);
 } else {
     setTimeout(() => {
         console.log("pause");
@@ -134,7 +134,7 @@ function onButton(evt: Event): void {
         buttonsPressed.push(index);
         let numberOfPressedButtons: number = buttonsPressed.length;
         if (index == buttonOrder[numberOfPressedButtons - 1]) {   //is the value of the button pressed (index) the same like given Order
-            playSound("mamma_mia", numberOfPressedButtons);
+            playSound("mamma_mia", numberOfPressedButtons, false);
         }
         
 
