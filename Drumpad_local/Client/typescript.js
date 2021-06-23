@@ -92,7 +92,9 @@ window.addEventListener("load", function () {
         for (let i = 0; i <= a.length; i++) {
             if (a[i] == true) {
                 startingPart = 0;
-                playSound("mamma_mia", i, true);
+                setTimeout(() => {
+                    playSound("mamma_mia", i, true);
+                }, 500);
             }
             else {
                 setTimeout(() => {
