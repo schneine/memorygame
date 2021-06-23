@@ -14,13 +14,17 @@ window.addEventListener("load", function () {
     let currentlyPlaying = false;
     let buttonsPressed = [];
     let buttonOrder = [];
+    let numberOfButtons = 4;
+    let startingPart = 0;
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
     socket.onopen = function () { socket.send(JSON.stringify("hello world")); };
     socket.onmessage = function (event) {
         console.log(event.data);
-        if (event.data == "play") {
+        if (event.data.includes("play")) {
             playerMessage.innerHTML = "It's your turn";
             currentlyPlaying = true;
+            startingPart = parseInt(event.data, 10);
+            console.log(startingPart);
         }
     };
     console.log(buttons.length);
@@ -30,7 +34,7 @@ window.addEventListener("load", function () {
     }
     startButton.addEventListener("mousedown", () => {
         if (currentlyPlaying) {
-            randomButtonOrder(4);
+            randomButtonOrder(numberOfButtons);
             console.log(buttonOrder);
             playRandom(buttonOrder);
             currentlyPlaying = false;
@@ -45,7 +49,8 @@ window.addEventListener("load", function () {
     //Spieler spielen abwechselnd 5 Töne bis Melodie fertig ist
     //Nach Melodieende nur die richtigen Töne für alle Spieler abspielen
     function playSound(song, counter) {
-        var sound = new Audio("../assets/" + song + "/Marker" + counter + ".mp3");
+        let index = counter + startingPart;
+        var sound = new Audio("../assets/" + song + "/Marker" + index + ".mp3");
         console.log("sound");
         sound.play();
     }
@@ -116,9 +121,9 @@ window.addEventListener("load", function () {
         else {
             console.log("incorrectOrder");
         }
-        socket.send("player finished");
         playerMessage.innerHTML = "now it's the other players turn";
         socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
+        socket.send("player finished");
         console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
     }
     function correctKeys(a, b) {

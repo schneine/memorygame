@@ -8,13 +8,17 @@ const buttons: NodeListOf<HTMLDivElement> = document.querySelectorAll(".Taste");
 let currentlyPlaying: boolean = false;
 let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
+let numberOfButtons: number = 4;
+let startingPart: number = 0;
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
 socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
 socket.onmessage = function (event: MessageEvent): void {
     console.log(event.data);
-    if (event.data == "play") {
+    if (event.data.includes("play")) {
     playerMessage.innerHTML = "It's your turn";
     currentlyPlaying = true;
+    startingPart = parseInt(event.data, 10);
+    console.log(startingPart);
     }
 };
 console.log(buttons.length);
@@ -25,7 +29,7 @@ for (let button of buttons) {
     }
 startButton.addEventListener("mousedown", () => {
     if (currentlyPlaying) {
-        randomButtonOrder(4);
+        randomButtonOrder(numberOfButtons);
         console.log(buttonOrder);
         playRandom(buttonOrder);
         currentlyPlaying = false;
@@ -42,7 +46,8 @@ startButton.addEventListener("mousedown", () => {
 //Nach Melodieende nur die richtigen Töne für alle Spieler abspielen
 
 function playSound(song: string, counter: number): void {
-    var sound:HTMLAudioElement = new Audio("../assets/" + song + "/Marker" + counter + ".mp3");
+    let index: number = counter + startingPart;
+    var sound: HTMLAudioElement = new Audio("../assets/" + song + "/Marker" + index + ".mp3");
     console.log("sound");
     sound.play();
 
@@ -146,9 +151,10 @@ function endOfTurn(): void {
 
 
     }
-    socket.send("player finished");
+    
     playerMessage.innerHTML = "now it's the other players turn";
     socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
+    socket.send("player finished");
     console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
 
 }

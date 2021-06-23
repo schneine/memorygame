@@ -11,6 +11,7 @@ let player2 = null;
 // init counters (0 is number of connected clients)
 let gameStarted = false;
 let currentPlayer = -1;
+let results = [];
 function broadcast(message) {
     if (player1 != null) {
         player1.send(message.toUpperCase());
@@ -22,13 +23,16 @@ function broadcast(message) {
 function startGame() {
     currentPlayer = Math.floor(Math.random()) + 1;
     if (currentPlayer == 1) {
-        player1.send("play");
+        player1.send(results.length + "play");
         player2.send("wait");
     }
     else {
-        player2.send("play");
+        player2.send(results.length + "play");
         player1.send("wait");
     }
+}
+function updateResults(a) {
+    results = results.concat(a);
 }
 server.on("connection", (socket) => {
     let playerNumber = 0;
@@ -66,12 +70,22 @@ server.on("connection", (socket) => {
         if (data == "player finished") {
             currentPlayer = currentPlayer == 1 ? 2 : 1; //changing the player
             if (currentPlayer == 1) {
-                player1.send("play");
+                player1.send(results.length + "play");
                 player2.send("wait");
             }
             else {
-                player2.send("play");
+                player2.send(results.length + "play");
                 player1.send("wait");
+            }
+        }
+        else {
+            try {
+                let response = JSON.parse(data.toString()); //can we extract an array send from socket(client)
+                console.log(response);
+                updateResults(response);
+            }
+            catch (e) {
+                console.log("couldnt parse");
             }
         }
     });

@@ -1,3 +1,4 @@
+import { ExecException } from "child_process";
 import * as WebSocket from "ws";
 
 
@@ -14,6 +15,7 @@ let player2: WebSocket = null;
 
 let gameStarted: boolean = false; 
 let currentPlayer: number = -1;
+let results: boolean [] = [];
 
 function broadcast(message: string): void {
   if (player1 != null) {
@@ -28,13 +30,17 @@ player2.send(message.toUpperCase());
 function startGame(): void {
   currentPlayer = Math.floor(Math.random()) + 1;
   if (currentPlayer == 1 ) {
-    player1.send("play");
+    player1.send(results.length + "play");
     player2.send("wait");
   }
   else {
-    player2.send("play");
+    player2.send(results.length + "play");
     player1.send("wait");
   }
+}
+
+function updateResults(a: boolean []): void {    //new results are added to the former results
+  results = results.concat(a);
 }
 
 server.on("connection", (socket) => {
@@ -79,13 +85,23 @@ server.on("connection", (socket) => {
     if (data == "player finished") {
       currentPlayer = currentPlayer == 1 ? 2 : 1; //changing the player
       if (currentPlayer == 1 ) {
-        player1.send("play");
+        player1.send(results.length + "play");
         player2.send("wait");
       }
       else {
-        player2.send("play");
+        player2.send(results.length + "play");
         player1.send("wait");
       } 
+    } else {
+      try {
+        let response: boolean [] = JSON.parse(data.toString());   //can we extract an array send from socket(client)
+        console.log(response);
+        updateResults(response);
+
+      } catch (e) {
+      console.log("couldnt parse");
+      }
+
     }
     
     
