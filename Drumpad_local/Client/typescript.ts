@@ -12,10 +12,11 @@ socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); }
 socket.onmessage = function (event: MessageEvent): void {
     console.log(event.data);
     if (event.data == "play") {
-    randomButtonOrder(7);
-    console.log(buttonOrder);
-    playRandom(buttonOrder);
     playerMessage.innerHTML = "It's your turn";
+    startButton.style.display = "block";
+    }
+    else {
+        startButton.style.display = "none";
     }
 };
 console.log(buttons.length);
@@ -25,7 +26,7 @@ for (let button of buttons) {
     console.log("adding");
     }
 startButton.addEventListener("mousedown", () => {
-    randomButtonOrder(7);
+    randomButtonOrder(4);
     console.log(buttonOrder);
     playRandom(buttonOrder);
     

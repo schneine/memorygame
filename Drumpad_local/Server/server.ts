@@ -74,6 +74,16 @@ server.on("connection", (socket) => {
   socket.on("message", data => {
     console.log(data);
     broadcast(data.toString());
+    if (data == "player finished") {
+      currentPlayer = currentPlayer == 1 ? 2 : 1; //changing the player
+      if (currentPlayer == 1 ) {
+        player1.send("play");
+      }
+      else {
+        player2.send("play");
+      } 
+    }
+    
     
   });
 

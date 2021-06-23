@@ -18,10 +18,11 @@ window.addEventListener("load", function () {
     socket.onmessage = function (event) {
         console.log(event.data);
         if (event.data == "play") {
-            randomButtonOrder(7);
-            console.log(buttonOrder);
-            playRandom(buttonOrder);
             playerMessage.innerHTML = "It's your turn";
+            startButton.style.display = "block";
+        }
+        else {
+            startButton.style.display = "none";
         }
     };
     console.log(buttons.length);
@@ -30,7 +31,7 @@ window.addEventListener("load", function () {
         console.log("adding");
     }
     startButton.addEventListener("mousedown", () => {
-        randomButtonOrder(7);
+        randomButtonOrder(4);
         console.log(buttonOrder);
         playRandom(buttonOrder);
     });
