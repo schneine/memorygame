@@ -101,7 +101,7 @@ server.on("connection", (socket) => {
         updateResults(response);
 
       } catch (e) {
-      console.log("couldnt parse");
+      
       }
 
     }
