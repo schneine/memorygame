@@ -99,13 +99,13 @@ p {
 
 #player {
   position:absolute;
-  top: 20%;
+  top: 5%;
   left: 47%;
 }
 
 #playermessage {
   position:absolute;
-  top: 20%;
+  top: 35%;
   left: 47%;
 }
 
