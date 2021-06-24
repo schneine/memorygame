@@ -94,6 +94,8 @@ function randomButtonOrder(n: number): void {
 }
 
 
+
+
 function playWholeMelody(a: boolean []): void {
     for (let i: number = 0; i <= a.length; i++) {
      if (a[i] == true) {
