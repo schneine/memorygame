@@ -15,7 +15,7 @@ window.addEventListener("load", function () {
     let buttonsPressed = [];
     let buttonOrder = [];
     let numberOfButtons = 4;
-    let songLength = 8;
+    let songLength = 20;
     let startingPart = 0;
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
     socket.onopen = function () { socket.send(JSON.stringify("hello world")); };
