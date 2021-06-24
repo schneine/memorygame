@@ -123,7 +123,7 @@ function automaticButton(index: number): void {
         target.classList.remove("active");
         target.classList.add("hidden");
 
-    } ,        400);
+    } ,        500);
 }
 
 function onButton(evt: Event): void {
@@ -154,7 +154,7 @@ function onButton(evt: Event): void {
             target.classList.add("hidden");
     
         } 
-        ,          200);
+        ,          500);
         
         if (buttonsPressed.length >= buttonOrder.length) {
             endOfTurn();
@@ -218,7 +218,7 @@ async function playRandom(order: number[]): Promise<void> {
       
       for (let i of order) {
           automaticButton(i);
-          await new Promise(r => setTimeout(r,1000));
+          await new Promise(r => setTimeout(r, 1000));
           
           //setInterval(() => automaticButton(i), 3000);
       }

@@ -108,7 +108,7 @@ window.addEventListener("load", function () {
         setTimeout(() => {
             target.classList.remove("active");
             target.classList.add("hidden");
-        }, 400);
+        }, 500);
     }
     function onButton(evt) {
         if (buttonsPressed.length >= buttonOrder.length) {
@@ -128,7 +128,7 @@ window.addEventListener("load", function () {
             setTimeout(() => {
                 target.classList.remove("active");
                 target.classList.add("hidden");
-            }, 200);
+            }, 500);
             if (buttonsPressed.length >= buttonOrder.length) {
                 endOfTurn();
             }
