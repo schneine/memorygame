@@ -108,7 +108,7 @@ window.addEventListener("load", function () {
         setTimeout(() => {
             target.classList.remove("active");
             target.classList.add("hidden");
-        }, 200);
+        }, 400);
     }
     function onButton(evt) {
         if (buttonsPressed.length >= buttonOrder.length) {

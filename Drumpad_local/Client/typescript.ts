@@ -123,7 +123,7 @@ function automaticButton(index: number): void {
         target.classList.remove("active");
         target.classList.add("hidden");
 
-    } ,        200);
+    } ,        400);
 }
 
 function onButton(evt: Event): void {
