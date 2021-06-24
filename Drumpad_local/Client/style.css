@@ -6,9 +6,7 @@ body{
     font-family: Helvetica, sans-serif;
 }
 h1{
-  position: relative;
-  top: 50%;
-  left: 43%;
+  text-align: center;
   color: rgb(209, 153, 238);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   
@@ -80,7 +78,7 @@ h1{
 
 #start {
   position: absolute;
-  top: 80%;
+  bottom: 20%;
   left: 45%;
   background-color: lightcoral;
   width: 100px;
@@ -88,6 +86,7 @@ h1{
   border-radius: 30%;
   border-color: rgb(240, 104, 104);
   border-width: 4px;
+  
   
 }
 
@@ -98,14 +97,14 @@ p {
 }
 
 #player {
-  position:absolute;
-  top: 15%;
+  position: absolute;
+  top: 18%;
   left: 47%;
 }
 
 #playermessage {
-  position: absolute;
-  top: 32%;
+  position: relative;
+  top: 25%;
   left: 47%;
 }
 
