@@ -15,7 +15,7 @@ window.addEventListener("load", function () {
     let buttonsPressed = [];
     let buttonOrder = [];
     let numberOfButtons = 4;
-    let songLength = 16;
+    let songLength = 16; //variable für Songlänge
     let startingPart = 0;
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
     socket.onopen = function () { socket.send(JSON.stringify("hello world")); };
@@ -55,11 +55,8 @@ window.addEventListener("load", function () {
             console.log("not your turn");
         }
     });
-    //für jeden Client ein neuen WebSocket kreieren (nur 2 Clients on connection möglich)
-    //durch Server kommunizieren wer anfängt und welcher Spieler dran ist
-    //Durch Server kommunizieren welche Töne richtig oder falsch gespielt wurden (über booelan array [true, true, false, false,true])
-    //Spieler spielen abwechselnd 5 Töne bis Melodie fertig ist
-    //Nach Melodieende nur die richtigen Töne für alle Spieler abspielen
+    //Clients gehen Array results von Server durch, bei true = Ton abspielen, false = pause/ Stille, Töne sollten 
+    //nacheinander abgespielt werden und automatisch nachdem das "Spiel" zu Ende ist
     function playSound(song, counter, fromStart) {
         let index = fromStart ? counter : counter + startingPart;
         var sound = new Audio("../assets/" + song + "/Marker" + index + ".mp3");
@@ -69,7 +66,7 @@ window.addEventListener("load", function () {
     function randomButtonOrder(n) {
         buttonOrder = [];
         buttonsPressed = [];
-        if (startingPart + n > songLength) {
+        if (startingPart + n > songLength) { //überprüfung ob Melodie zu Ende ist
             n = songLength - startingPart;
         }
         if (n > 0) {

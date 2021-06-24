@@ -27,7 +27,7 @@ player2.send(message);
 } 
 }
 
-function startGame(): void {
+function startGame(): void {                         //ausgelost wer anfängt
   currentPlayer = Math.floor(Math.random()) + 1;
   if (currentPlayer == 1 ) {
     player1.send(results.length + "play");

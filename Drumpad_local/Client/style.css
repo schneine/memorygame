@@ -38,35 +38,35 @@ h1{
 .Taste[data-index="0"] {
     top: 0px;
     left: -75px;
-    background-color: green;
+    background-color: #CEE2D8;
   }
   
   .Taste[data-index="1"] {
     top: 0px;
     left: 75px;
-    background-color: red;
+    background-color: #EAEBC8;
   }
   
   .Taste[data-index="2"] {
     top: 60px;
     left: -75px;
-    background-color: yellow;
+    background-color: #D8E2EE;
   }
   
   .Taste[data-index="3"] {
     top: 60px;
     left: 0px;
-    background-color: orange;
+    background-color: #F39C9E;
   }
   .Taste[data-index="4"] {
     top: 0px;
     left: 0px;
-    background-color: rgba(241, 118, 245, 0.589);
+    background-color: #D5BADA;
   }
   .Taste[data-index="5"] {
     top: 60px;
     left: 75px;
-    background-color: rgba(247, 94, 153, 0.801);
+    background-color: #D4D2DD;
   }
 
   .Taste.active {
@@ -74,7 +74,7 @@ h1{
   }
   
   .Taste.hidden {
-    opacity: 0.2;
+    opacity: 0.;
   }
 
 
