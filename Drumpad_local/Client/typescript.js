@@ -30,7 +30,7 @@ window.addEventListener("load", function () {
             buttonsPressed = [];
             randomButtonOrder(numberOfButtons);
             console.log(buttonOrder);
-            //countdownfunction
+            startTimer();
             playRandom(buttonOrder);
             //currentlyPlaying = false;
         }

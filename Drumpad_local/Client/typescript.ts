@@ -24,7 +24,7 @@ socket.onmessage = function (event: MessageEvent): void {
         buttonsPressed = [];
         randomButtonOrder(numberOfButtons);
         console.log(buttonOrder);
-        //countdownfunction
+        startTimer();
         playRandom(buttonOrder);
         //currentlyPlaying = false;
     
