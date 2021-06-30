@@ -17,6 +17,7 @@ window.addEventListener("load", function () {
     let numberOfButtons = 4;
     let songLength = 16; //variable für Songlänge
     let startingPart = 0;
+    let counterDisplay = document.getElementById("countdown");
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
     socket.onopen = function () { socket.send(JSON.stringify("hello world")); };
     socket.onmessage = function (event) {
@@ -110,6 +111,7 @@ window.addEventListener("load", function () {
             if (this.counter.min === 0 && this.counter.sec == 0)
                 clearInterval(intervalId);
         }, 1000);
+        counterDisplay.innerHTML = this.counter;
     }
     function playWholeMelody(a) {
         for (let i = 0; i <= a.length; i++) {

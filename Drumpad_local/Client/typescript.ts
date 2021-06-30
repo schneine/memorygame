@@ -11,6 +11,7 @@ let buttonOrder: number [] = [];
 let numberOfButtons: number = 4;
 let songLength: number = 16;        //variable für Songlänge
 let startingPart: number = 0;
+let counterDisplay: HTMLSpanElement = document.getElementById("countdown");
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
 socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
 socket.onmessage = function (event: MessageEvent): void {
@@ -120,6 +121,7 @@ function startTimer(): void {
       else this.counter.sec -= 1;
       if (this.counter.min === 0 && this.counter.sec == 0) clearInterval(intervalId);
     }, 1000)
+    counterDisplay.innerHTML = this.counter;
   }
 
 
