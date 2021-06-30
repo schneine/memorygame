@@ -2,7 +2,7 @@
 
 window.addEventListener("load", function(): void { 
 
-const startButton: HTMLElement = document.getElementById("start");
+//const startButton: HTMLElement = document.getElementById("start");
 const playerMessage: HTMLElement = document.getElementById("playermessage");
 const buttons: NodeListOf<HTMLDivElement> = document.querySelectorAll(".Taste");
 let currentlyPlaying: boolean = false;
@@ -35,9 +35,7 @@ socket.onmessage = function (event: MessageEvent): void {
             console.log(response);
             playWholeMelody(response);
     
-          } catch (e) {
-          
-          }
+        } catch (e) {}
     }
 };
 console.log(buttons.length);

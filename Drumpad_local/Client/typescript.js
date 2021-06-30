@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 window.addEventListener("load", function () {
-    const startButton = document.getElementById("start");
+    //const startButton: HTMLElement = document.getElementById("start");
     const playerMessage = document.getElementById("playermessage");
     const buttons = document.querySelectorAll(".Taste");
     let currentlyPlaying = false;
@@ -39,8 +39,7 @@ window.addEventListener("load", function () {
                 console.log(response);
                 playWholeMelody(response);
             }
-            catch (e) {
-            }
+            catch (e) { }
         }
     };
     console.log(buttons.length);
