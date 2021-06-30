@@ -3,7 +3,7 @@
 window.addEventListener("load", function(): void { 
 
 //const startButton: HTMLElement = document.getElementById("start");
-const playerMessage: HTMLElement = document.getElementById("playermessage");
+const playerMessage: HTMLElement = document.querySelector(".playermessage");
 const buttons: NodeListOf<HTMLDivElement> = document.querySelectorAll(".Taste");
 
 let currentlyPlaying: boolean = false;
@@ -157,6 +157,9 @@ function playWholeMelody(song: string, a: boolean[]): void {
 function overlay(): void {
     const background: HTMLElement = document.querySelector(".background");
     background.classList.add("overlay");
+    playerMessage.classList.add("guess");
+    
+
 
 }
 

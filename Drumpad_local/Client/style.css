@@ -108,10 +108,18 @@ p {
   left: 47%;
 }
 
-#playermessage {
+.playermessage {
   position: relative;
   top: 20%;
   left: 47%;
+}
+
+.playermessage.guess {
+  position: relative;
+  top: 20%;
+  left: 47%;
+  color: rgb(255, 254, 254);
+  z-index: 3;
 }
 
 
