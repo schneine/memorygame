@@ -39,7 +39,7 @@ window.addEventListener("load", function () {
             try {
                 let response = JSON.parse(event.data.toString()); //can we extract an array send from server
                 console.log(response);
-                playWholeMelody(response);
+                playWholeMelody("mamma_mia", response);
             }
             catch (e) { }
         }
@@ -113,21 +113,49 @@ window.addEventListener("load", function () {
         }, 1000);
         counterDisplay.innerHTML = this.counter;
     }
-    function playWholeMelody(a) {
-        for (let i = 0; i <= a.length; i++) {
-            if (a[i] == true) {
-                startingPart = 0;
-                setTimeout(() => {
-                    playSound("mamma_mia", i, true);
-                }, 2000);
+    function playWholeMelody(song, a) {
+        // load audio elements
+        let allAudio = [];
+        for (let i = 0; i < a.length; i++) {
+            console.log("starting");
+            if (a[i]) {
+                // if the i-th button was pressed correctly (i.e. a at index i is true),
+                // push the i-th sound file
+                allAudio.push(new Audio("../assets/" + song + "/Marker" + (i + 1) + ".mp3"));
             }
             else {
-                setTimeout(() => {
-                    console.log("pause");
-                }, 200);
+                // if it was not correct, push a silent mp3 (currently: 750ms)
+                allAudio.push(new Audio("../assets/silence.mp3"));
+            }
+            console.log(allAudio[0]);
+            if (i + 1 < a.length) {
+                // if the audio added is not the last part, then specify that when it has
+                // finished playing, the next audio element in the array is played
+                allAudio[i].addEventListener("ended", () => {
+                    allAudio[i + 1].play();
+                });
             }
         }
+        // start playing the first sound
+        allAudio[0].play();
     }
+    /*function playWholeMelody(a: boolean []): void {
+        for (let i: number = 0; i <= a.length; i++) {
+         if (a[i] == true) {
+         startingPart = 0;
+         setTimeout(() => {
+            playSound("mamma_mia", i, true);
+         }, 2000);
+         
+    } else {
+        setTimeout(() => {
+            console.log("pause");
+    
+        }
+        ,          200);
+    }
+        }
+    }*/
     function automaticButton(index) {
         const target = buttons.item(index);
         target.classList.remove("hidden");
