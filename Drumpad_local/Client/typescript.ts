@@ -157,8 +157,8 @@ function playWholeMelody(song: string, a: boolean[]): void {
 function overlay(): void {
     const background: HTMLElement = document.querySelector(".background");
     background.classList.add("overlay");
-    playerMessage.id = "guess";
-    playerMessage.innerHTML = "Guess the melody!";
+    /*playerMessage.id = "guess";
+    playerMessage.innerHTML = "Guess the melody!";*/
     
 }
 
