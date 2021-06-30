@@ -11,6 +11,7 @@ window.addEventListener("load", function () {
     //const startButton: HTMLElement = document.getElementById("start");
     const playerMessage = document.getElementById("playermessage");
     const buttons = document.querySelectorAll(".Taste");
+    const background = document.querySelector(".background");
     let currentlyPlaying = false;
     let buttonsPressed = [];
     let buttonOrder = [];
@@ -140,7 +141,6 @@ window.addEventListener("load", function () {
         allAudio[0].play();
     }
     function overlay() {
-        const background = document.querySelector(".background");
         background.classList.add("overlay");
         playerMessage.id = "guess";
         playerMessage.innerHTML = "Guess the melody!";
@@ -216,6 +216,7 @@ window.addEventListener("load", function () {
         else {
             console.log("incorrectOrder");
         }
+        background.classList.add("overlay");
         playerMessage.innerHTML = "now it's the other players turn";
         socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
         socket.send("player finished");

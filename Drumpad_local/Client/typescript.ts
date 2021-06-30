@@ -5,6 +5,7 @@ window.addEventListener("load", function(): void {
 //const startButton: HTMLElement = document.getElementById("start");
 const playerMessage: HTMLElement = document.getElementById("playermessage");
 const buttons: NodeListOf<HTMLDivElement> = document.querySelectorAll(".Taste");
+const background: HTMLElement = document.querySelector(".background");
 
 let currentlyPlaying: boolean = false;
 let buttonsPressed: number[] = [];
@@ -155,7 +156,7 @@ function playWholeMelody(song: string, a: boolean[]): void {
 }
 
 function overlay(): void {
-    const background: HTMLElement = document.querySelector(".background");
+    
     background.classList.add("overlay");
     playerMessage.id = "guess";
     playerMessage.innerHTML = "Guess the melody!";
@@ -260,7 +261,7 @@ function endOfTurn(): void {
 
 
     }
-    
+    background.classList.add("overlay");
     playerMessage.innerHTML = "now it's the other players turn";
     socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
     socket.send("player finished");
