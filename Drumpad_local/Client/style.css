@@ -67,6 +67,12 @@ h1{
     background-color: #D4D2DD;
   }
 
+  .background.overlay {
+    background-color: dimgrey;
+    opacity: 0.4;
+    z-index: 2;
+  }
+
   .Taste.active {
     opacity: 1;
   }

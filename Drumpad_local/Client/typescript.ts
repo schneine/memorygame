@@ -5,6 +5,7 @@ window.addEventListener("load", function(): void {
 //const startButton: HTMLElement = document.getElementById("start");
 const playerMessage: HTMLElement = document.getElementById("playermessage");
 const buttons: NodeListOf<HTMLDivElement> = document.querySelectorAll(".Taste");
+
 let currentlyPlaying: boolean = false;
 let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
@@ -127,6 +128,7 @@ function startTimer(): void {
 
 function playWholeMelody(song: string, a: boolean[]): void {
     // load audio elements
+    overlay();
     let allAudio: HTMLAudioElement[] = [];
     for (let i: number = 0; i < a.length; i++) {
         console.log("starting");
@@ -150,6 +152,12 @@ function playWholeMelody(song: string, a: boolean[]): void {
     }
     // start playing the first sound
     allAudio[0].play();
+}
+
+function overlay(): void {
+    const background: HTMLElement = document.querySelector(".background");
+    background.classList.add("overlay");
+
 }
 
 

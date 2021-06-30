@@ -114,6 +114,7 @@ window.addEventListener("load", function () {
     }
     function playWholeMelody(song, a) {
         // load audio elements
+        overlay();
         let allAudio = [];
         for (let i = 0; i < a.length; i++) {
             console.log("starting");
@@ -137,6 +138,10 @@ window.addEventListener("load", function () {
         }
         // start playing the first sound
         allAudio[0].play();
+    }
+    function overlay() {
+        const background = document.querySelector(".background");
+        background.classList.add("overlay");
     }
     /*function playWholeMelody(a: boolean []): void {
         for (let i: number = 0; i <= a.length; i++) {
