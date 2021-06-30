@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 window.addEventListener("load", function () {
     //const startButton: HTMLElement = document.getElementById("start");
-    const playerMessage = document.querySelector(".playermessage");
+    const playerMessage = document.getElementById("playermessage");
     const buttons = document.querySelectorAll(".Taste");
     let currentlyPlaying = false;
     let buttonsPressed = [];
@@ -142,7 +142,7 @@ window.addEventListener("load", function () {
     function overlay() {
         const background = document.querySelector(".background");
         background.classList.add("overlay");
-        playerMessage.classList.add("guess");
+        playerMessage.id = "guess";
         playerMessage.innerHTML = "Guess the melody!";
     }
     /*function playWholeMelody(a: boolean []): void {
