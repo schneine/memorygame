@@ -158,6 +158,7 @@ function overlay(): void {
     const background: HTMLElement = document.querySelector(".background");
     background.classList.add("overlay");
     playerMessage.classList.add("guess");
+    playerMessage.innerHTML = "Guess the melody!";
     
 
 
