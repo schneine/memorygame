@@ -16,10 +16,17 @@ socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); }
 socket.onmessage = function (event: MessageEvent): void {
     console.log(event.data);
     if (event.data.includes("play")) {
-    playerMessage.innerHTML = "It's your turn";
-    currentlyPlaying = true;
-    startingPart = parseInt(event.data, 10);
-    console.log(startingPart);
+        playerMessage.innerHTML = "It's your turn";
+        currentlyPlaying = true;
+        startingPart = parseInt(event.data, 10);
+        console.log(startingPart);
+        buttonOrder = [];
+        buttonsPressed = [];
+        randomButtonOrder(numberOfButtons);
+        console.log(buttonOrder);
+        playRandom(buttonOrder);
+        currentlyPlaying = false;
+    
     }
 
     else {
@@ -39,7 +46,7 @@ for (let button of buttons) {
     button.addEventListener("mousedown", onButton);
     console.log("adding");
     }
-startButton.addEventListener("mousedown", () => {
+/*startButton.addEventListener("mousedown", () => {
     
     if (currentlyPlaying) {
         buttonOrder = [];
@@ -53,7 +60,7 @@ startButton.addEventListener("mousedown", () => {
     else {
         console.log("not your turn");
     }
-} );
+} );*/
 
 //Clients gehen Array results von Server durch, bei true = Ton abspielen, false = pause/ Stille, Töne sollten 
 //nacheinander abgespielt werden und automatisch nachdem das "Spiel" zu Ende ist

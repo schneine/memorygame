@@ -26,6 +26,12 @@ window.addEventListener("load", function () {
             currentlyPlaying = true;
             startingPart = parseInt(event.data, 10);
             console.log(startingPart);
+            buttonOrder = [];
+            buttonsPressed = [];
+            randomButtonOrder(numberOfButtons);
+            console.log(buttonOrder);
+            playRandom(buttonOrder);
+            currentlyPlaying = false;
         }
         else {
             try {
@@ -42,7 +48,8 @@ window.addEventListener("load", function () {
         button.addEventListener("mousedown", onButton);
         console.log("adding");
     }
-    startButton.addEventListener("mousedown", () => {
+    /*startButton.addEventListener("mousedown", () => {
+        
         if (currentlyPlaying) {
             buttonOrder = [];
             buttonsPressed = [];
@@ -50,11 +57,12 @@ window.addEventListener("load", function () {
             console.log(buttonOrder);
             playRandom(buttonOrder);
             currentlyPlaying = false;
+            
         }
         else {
             console.log("not your turn");
         }
-    });
+    } );*/
     //Clients gehen Array results von Server durch, bei true = Ton abspielen, false = pause/ Stille, Töne sollten 
     //nacheinander abgespielt werden und automatisch nachdem das "Spiel" zu Ende ist
     function playSound(song, counter, fromStart) {
