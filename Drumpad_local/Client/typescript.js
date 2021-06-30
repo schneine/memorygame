@@ -24,6 +24,7 @@ window.addEventListener("load", function () {
     socket.onmessage = function (event) {
         console.log(event.data);
         if (event.data.includes("play")) {
+            background.classList.remove("overlay");
             playerMessage.innerHTML = "It's your turn";
             currentlyPlaying = true;
             startingPart = parseInt(event.data, 10);
@@ -215,6 +216,7 @@ window.addEventListener("load", function () {
         else {
             console.log("incorrectOrder");
         }
+        background.classList.add("overlay");
         playerMessage.innerHTML = "now it's the other players turn";
         socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
         socket.send("player finished");

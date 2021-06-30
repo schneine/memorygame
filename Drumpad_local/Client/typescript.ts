@@ -19,6 +19,7 @@ socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); }
 socket.onmessage = function (event: MessageEvent): void {
     console.log(event.data);
     if (event.data.includes("play")) {
+        background.classList.remove("overlay");
         playerMessage.innerHTML = "It's your turn";
         currentlyPlaying = true;
         startingPart = parseInt(event.data, 10);
@@ -261,7 +262,7 @@ function endOfTurn(): void {
 
 
     }
-   
+    background.classList.add("overlay");
     playerMessage.innerHTML = "now it's the other players turn";
     socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
     socket.send("player finished");
