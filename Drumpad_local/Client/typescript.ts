@@ -24,6 +24,7 @@ socket.onmessage = function (event: MessageEvent): void {
         buttonsPressed = [];
         randomButtonOrder(numberOfButtons);
         console.log(buttonOrder);
+        //countdownfunction
         playRandom(buttonOrder);
         //currentlyPlaying = false;
     
@@ -73,6 +74,13 @@ function playSound(song: string, counter: number, fromStart: boolean): void {
 
 }
 
+/*function theMelody(): void {
+    playSound("mamma_mia", 1, true); index += 1;
+    if (index > (Beat.length - 1)) index=0;
+    console.log(Beat[index]);
+    }*/
+
+
 function randomButtonOrder(n: number): void {
     buttonOrder = [];
     buttonsPressed = [];
@@ -97,6 +105,22 @@ function randomButtonOrder(n: number): void {
     
     console.log(buttonOrder.length + "/" + n);
 }
+
+interface Counter { 
+    min: number; sec: number; 
+}
+
+function startTimer(): void {
+    this.counter = { min: 0, sec: 3 }; // choose whatever you want
+    let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
+      if (this.counter.sec - 1 == -1) {
+        this.counter.min -= 1;
+        this.counter.sec = 59;
+      } 
+      else this.counter.sec -= 1;
+      if (this.counter.min === 0 && this.counter.sec == 0) clearInterval(intervalId);
+    }, 1000)
+  }
 
 
 

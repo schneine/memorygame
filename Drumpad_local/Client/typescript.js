@@ -30,6 +30,7 @@ window.addEventListener("load", function () {
             buttonsPressed = [];
             randomButtonOrder(numberOfButtons);
             console.log(buttonOrder);
+            //countdownfunction
             playRandom(buttonOrder);
             //currentlyPlaying = false;
         }
@@ -70,6 +71,11 @@ window.addEventListener("load", function () {
         console.log("sound");
         sound.play();
     }
+    /*function theMelody(): void {
+        playSound("mamma_mia", 1, true); index += 1;
+        if (index > (Beat.length - 1)) index=0;
+        console.log(Beat[index]);
+        }*/
     function randomButtonOrder(n) {
         buttonOrder = [];
         buttonsPressed = [];
@@ -91,6 +97,19 @@ window.addEventListener("load", function () {
             socket.send("End");
         }
         console.log(buttonOrder.length + "/" + n);
+    }
+    function startTimer() {
+        this.counter = { min: 0, sec: 3 }; // choose whatever you want
+        let intervalId = setInterval(() => {
+            if (this.counter.sec - 1 == -1) {
+                this.counter.min -= 1;
+                this.counter.sec = 59;
+            }
+            else
+                this.counter.sec -= 1;
+            if (this.counter.min === 0 && this.counter.sec == 0)
+                clearInterval(intervalId);
+        }, 1000);
     }
     function playWholeMelody(a) {
         for (let i = 0; i <= a.length; i++) {
