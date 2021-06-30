@@ -100,18 +100,17 @@ window.addEventListener("load", function () {
         console.log(buttonOrder.length + "/" + n);
     }
     function startTimer() {
-        this.counter = { min: 0, sec: 3 }; // choose whatever you want
+        this.counter = { sec: 3 }; // choose whatever you want
         let intervalId = setInterval(() => {
             if (this.counter.sec - 1 == -1) {
-                this.counter.min -= 1;
-                this.counter.sec = 59;
+                this.counter.sec = 1;
             }
             else
                 this.counter.sec -= 1;
-            if (this.counter.min === 0 && this.counter.sec == 0)
+            if (this.counter.sec == 0)
                 clearInterval(intervalId);
         }, 1000);
-        counterDisplay.innerHTML = this.counter;
+        counterDisplay.innerHTML = this.counter.sec;
     }
     function playWholeMelody(song, a) {
         // load audio elements
