@@ -160,9 +160,6 @@ function overlay(): void {
     playerMessage.id = "guess";
     playerMessage.innerHTML = "Guess the melody!";
     
-    
-
-
 }
 
 
