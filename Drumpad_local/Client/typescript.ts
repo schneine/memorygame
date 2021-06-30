@@ -25,7 +25,7 @@ socket.onmessage = function (event: MessageEvent): void {
         randomButtonOrder(numberOfButtons);
         console.log(buttonOrder);
         playRandom(buttonOrder);
-        currentlyPlaying = false;
+        //currentlyPlaying = false;
     
     }
 
@@ -186,6 +186,7 @@ function arrayEquals(a: number [], b: number []): boolean {    //untersucht ob g
 
 function endOfTurn(): void {
     
+    currentlyPlaying = false;
     
     if (arrayEquals(buttonsPressed, buttonOrder)) {
         console.log("correctOrder");

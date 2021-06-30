@@ -31,7 +31,7 @@ window.addEventListener("load", function () {
             randomButtonOrder(numberOfButtons);
             console.log(buttonOrder);
             playRandom(buttonOrder);
-            currentlyPlaying = false;
+            //currentlyPlaying = false;
         }
         else {
             try {
@@ -153,6 +153,7 @@ window.addEventListener("load", function () {
         }
     }
     function endOfTurn() {
+        currentlyPlaying = false;
         if (arrayEquals(buttonsPressed, buttonOrder)) {
             console.log("correctOrder");
         }
