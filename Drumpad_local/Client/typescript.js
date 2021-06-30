@@ -215,7 +215,6 @@ window.addEventListener("load", function () {
         else {
             console.log("incorrectOrder");
         }
-        background.classList.add("overlay");
         playerMessage.innerHTML = "now it's the other players turn";
         socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
         socket.send("player finished");
