@@ -144,6 +144,7 @@ window.addEventListener("load", function () {
         background.classList.add("overlay");
         playerMessage.id = "guess";
         playerMessage.innerHTML = "Guess the melody!";
+        //now
     }
     /*function playWholeMelody(a: boolean []): void {
         for (let i: number = 0; i <= a.length; i++) {

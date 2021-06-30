@@ -159,6 +159,7 @@ function overlay(): void {
     background.classList.add("overlay");
     playerMessage.id = "guess";
     playerMessage.innerHTML = "Guess the melody!";
+    //now
     
 }
 
