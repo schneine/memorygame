@@ -121,11 +121,7 @@ async function startTimer(): Promise<void> {
     background.classList.remove("overlay");
     counterDisplay.innerHTML = "";
 
-
-    
-    
-
-  }
+}
 
 
 
