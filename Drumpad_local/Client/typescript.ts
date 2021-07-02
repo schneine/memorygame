@@ -28,8 +28,10 @@ socket.onmessage = function (event: MessageEvent): void {
         buttonsPressed = [];
         randomButtonOrder(numberOfButtons);
         console.log(buttonOrder);
-        startTimer();
-        playRandom(buttonOrder);
+        startTimer().then(() => {
+            playRandom(buttonOrder);
+        });
+       
         //currentlyPlaying = false;
     
     }
@@ -108,7 +110,7 @@ interface Counter {
     min: number; sec: number; 
 }
 
-function startTimer(): void {
+async function startTimer(): Promise<void> {
     
     /*this.counter = { sec: 3 }; // choose whatever you want
     let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
@@ -122,12 +124,14 @@ function startTimer(): void {
 
     background.classList.add("overlay");
     
-    /*for (let i: number = 3; i > 0; i--) {
+    for (let i: number = 3; i > 0; i--) {
         counterDisplay.innerHTML = i.toString();
         await new Promise(r => setTimeout(r, 400));
-    }*/
+    }
+    background.classList.remove("overlay");
+    counterDisplay.innerHTML = "";
 
-    let timeLeft: number = 3;
+    /*let timeLeft: number = 3;
     let countdownTimer: ReturnType<typeof setInterval> = setInterval(() => {
         if (timeLeft <= 0) {
             background.classList.remove("overlay");
@@ -137,7 +141,7 @@ function startTimer(): void {
         counterDisplay.innerHTML = timeLeft.toString();
         console.log(timeLeft);
         timeLeft -= 1;
-        }, 500);
+        }, 500);*/
 
     
     

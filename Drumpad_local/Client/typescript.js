@@ -33,8 +33,9 @@ window.addEventListener("load", function () {
             buttonsPressed = [];
             randomButtonOrder(numberOfButtons);
             console.log(buttonOrder);
-            startTimer();
-            playRandom(buttonOrder);
+            startTimer().then(() => {
+                playRandom(buttonOrder);
+            });
             //currentlyPlaying = false;
         }
         else {
@@ -97,31 +98,35 @@ window.addEventListener("load", function () {
         console.log(buttonOrder.length + "/" + n);
     }
     function startTimer() {
-        /*this.counter = { sec: 3 }; // choose whatever you want
-        let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
-          if (this.counter.sec - 1 == -1) {
-            this.counter.sec = 3;
-          }
-          else this.counter.sec -= 1;
-          if (this.counter.sec == 0) clearInterval(intervalId);
-        }, 1000)
-        counterDisplay.innerHTML = this.counter.sec;*/
-        background.classList.add("overlay");
-        /*for (let i: number = 3; i > 0; i--) {
-            counterDisplay.innerHTML = i.toString();
-            await new Promise(r => setTimeout(r, 400));
-        }*/
-        let timeLeft = 3;
-        let countdownTimer = setInterval(() => {
-            if (timeLeft <= 0) {
-                background.classList.remove("overlay");
-                counterDisplay.innerHTML = "";
-                clearInterval(countdownTimer);
+        return __awaiter(this, void 0, void 0, function* () {
+            /*this.counter = { sec: 3 }; // choose whatever you want
+            let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
+              if (this.counter.sec - 1 == -1) {
+                this.counter.sec = 3;
+              }
+              else this.counter.sec -= 1;
+              if (this.counter.sec == 0) clearInterval(intervalId);
+            }, 1000)
+            counterDisplay.innerHTML = this.counter.sec;*/
+            background.classList.add("overlay");
+            for (let i = 3; i > 0; i--) {
+                counterDisplay.innerHTML = i.toString();
+                yield new Promise(r => setTimeout(r, 400));
             }
-            counterDisplay.innerHTML = timeLeft.toString();
-            console.log(timeLeft);
-            timeLeft -= 1;
-        }, 500);
+            background.classList.remove("overlay");
+            counterDisplay.innerHTML = "";
+            /*let timeLeft: number = 3;
+            let countdownTimer: ReturnType<typeof setInterval> = setInterval(() => {
+                if (timeLeft <= 0) {
+                    background.classList.remove("overlay");
+                    counterDisplay.innerHTML = "";
+                    clearInterval(countdownTimer);
+                }
+                counterDisplay.innerHTML = timeLeft.toString();
+                console.log(timeLeft);
+                timeLeft -= 1;
+                }, 500);*/
+        });
     }
     function playWholeMelody(song, a) {
         // load audio elements
