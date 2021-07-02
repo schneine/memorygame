@@ -112,6 +112,7 @@ window.addEventListener("load", function () {
                 counterDisplay.innerHTML = i.toString();
                 await new Promise(r => setTimeout(r, 400));
             }*/
+            //now it should work
             let timeLeft = 3;
             let countdownTimer = setInterval(() => {
                 if (timeLeft <= 0) {

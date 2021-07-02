@@ -127,6 +127,8 @@ async function startTimer(): Promise <void> {
         await new Promise(r => setTimeout(r, 400));
     }*/
 
+    //now it should work
+
     let timeLeft: number = 3;
     let countdownTimer: ReturnType<typeof setInterval> = setInterval(() => {
         if (timeLeft <= 0) {
