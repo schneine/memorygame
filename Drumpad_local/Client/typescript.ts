@@ -15,7 +15,7 @@ let songLength: number = 16;        //variable für Songlänge
 let startingPart: number = 0;
 let counterDisplay: HTMLSpanElement = document.getElementById("countdown");
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
-socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
+//socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
 socket.onmessage = function (event: MessageEvent): void {
     console.log(event.data);
     if (event.data.includes("play")) {
@@ -35,7 +35,9 @@ socket.onmessage = function (event: MessageEvent): void {
         //currentlyPlaying = false;
     
     }
-
+    //else if (event.data.includes("End")) {
+        
+   // }
     else {
         try {
             let response: boolean [] = JSON.parse(event.data.toString());   //can we extract an array send from server
@@ -67,8 +69,6 @@ for (let button of buttons) {
     }
 } );*/
 
-//Clients gehen Array results von Server durch, bei true = Ton abspielen, false = pause/ Stille, Töne sollten 
-//nacheinander abgespielt werden und automatisch nachdem das "Spiel" zu Ende ist
 
 
 function playSound(song: string, counter: number, fromStart: boolean): void {
@@ -287,7 +287,13 @@ function endOfTurn(): void {
     background.classList.add("overlay");
     playerMessage.innerHTML = "now it's the other players turn";
     socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
-    socket.send("player finished");
+    
+    if (startingPart + numberOfButtons >= songLength) {
+        socket.send("End");
+    }
+    else {
+        socket.send("player finished");
+    }
     //console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
 
 }

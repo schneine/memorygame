@@ -20,7 +20,7 @@ window.addEventListener("load", function () {
     let startingPart = 0;
     let counterDisplay = document.getElementById("countdown");
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
-    socket.onopen = function () { socket.send(JSON.stringify("hello world")); };
+    //socket.onopen = function (): void {socket.send(JSON.stringify("hello world")); };
     socket.onmessage = function (event) {
         console.log(event.data);
         if (event.data.includes("play")) {
@@ -38,6 +38,8 @@ window.addEventListener("load", function () {
             });
             //currentlyPlaying = false;
         }
+        //else if (event.data.includes("End")) {
+        // }
         else {
             try {
                 let response = JSON.parse(event.data.toString()); //can we extract an array send from server
@@ -67,8 +69,6 @@ window.addEventListener("load", function () {
             console.log("not your turn");
         }
     } );*/
-    //Clients gehen Array results von Server durch, bei true = Ton abspielen, false = pause/ Stille, Töne sollten 
-    //nacheinander abgespielt werden und automatisch nachdem das "Spiel" zu Ende ist
     function playSound(song, counter, fromStart) {
         let index = fromStart ? counter : counter + startingPart;
         var sound = new Audio("../assets/" + song + "/Marker" + index + ".mp3");
@@ -233,7 +233,12 @@ window.addEventListener("load", function () {
         background.classList.add("overlay");
         playerMessage.innerHTML = "now it's the other players turn";
         socket.send(JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
-        socket.send("player finished");
+        if (startingPart + numberOfButtons >= songLength) {
+            socket.send("End");
+        }
+        else {
+            socket.send("player finished");
+        }
         //console.log("difference", JSON.stringify(correctKeys(buttonsPressed, buttonOrder)));
     }
     function correctKeys(a, b) {
