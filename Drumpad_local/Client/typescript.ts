@@ -108,8 +108,9 @@ interface Counter {
     min: number; sec: number; 
 }
 
-function startTimer(): void {
-    this.counter = { sec: 3 }; // choose whatever you want
+async function startTimer(): Promise <void> {
+    
+    /*this.counter = { sec: 3 }; // choose whatever you want
     let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
       if (this.counter.sec - 1 == -1) {
         this.counter.sec = 3;
@@ -117,7 +118,25 @@ function startTimer(): void {
       else this.counter.sec -= 1;
       if (this.counter.sec == 0) clearInterval(intervalId);
     }, 1000)
-    counterDisplay.innerHTML = this.counter.sec;
+    counterDisplay.innerHTML = this.counter.sec;*/
+
+    background.classList.add("overlay");
+    
+    /*for (let i: number = 3; i > 0; i--) {
+        counterDisplay.innerHTML = i.toString();
+        await new Promise(r => setTimeout(r, 400));
+    }*/
+
+    let timeLeft: number = 3;
+    let countdownTimer: ReturnType<typeof setInterval> = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(countdownTimer);
+        }
+        counterDisplay.innerHTML = timeLeft.toString();
+        console.log(timeLeft);
+        timeLeft -= 1;
+        }, 500);
+
   }
 
 
