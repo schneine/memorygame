@@ -108,7 +108,7 @@ interface Counter {
     min: number; sec: number; 
 }
 
-async function startTimer(): Promise <void> {
+function startTimer(): void {
     
     /*this.counter = { sec: 3 }; // choose whatever you want
     let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
