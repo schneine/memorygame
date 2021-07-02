@@ -74,11 +74,6 @@ window.addEventListener("load", function () {
         console.log("sound");
         sound.play();
     }
-    /*function theMelody(): void {
-        playSound("mamma_mia", 1, true); index += 1;
-        if (index > (Beat.length - 1)) index=0;
-        console.log(Beat[index]);
-        }*/
     function randomButtonOrder(n) {
         buttonOrder = [];
         buttonsPressed = [];
@@ -105,7 +100,7 @@ window.addEventListener("load", function () {
         this.counter = { sec: 3 }; // choose whatever you want
         let intervalId = setInterval(() => {
             if (this.counter.sec - 1 == -1) {
-                this.counter.sec = 1;
+                this.counter.sec = 3;
             }
             else
                 this.counter.sec -= 1;

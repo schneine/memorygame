@@ -78,12 +78,6 @@ function playSound(song: string, counter: number, fromStart: boolean): void {
 
 }
 
-/*function theMelody(): void {
-    playSound("mamma_mia", 1, true); index += 1;
-    if (index > (Beat.length - 1)) index=0;
-    console.log(Beat[index]);
-    }*/
-
 
 function randomButtonOrder(n: number): void {
     buttonOrder = [];
@@ -118,7 +112,7 @@ function startTimer(): void {
     this.counter = { sec: 3 }; // choose whatever you want
     let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
       if (this.counter.sec - 1 == -1) {
-        this.counter.sec = 1;
+        this.counter.sec = 3;
       } 
       else this.counter.sec -= 1;
       if (this.counter.sec == 0) clearInterval(intervalId);
