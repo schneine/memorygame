@@ -22,7 +22,7 @@ function broadcast(message) {
 }
 function startGame() {
     results = []; //ausgelost wer anfängt
-    currentPlayer = Math.floor(Math.random()) + 1;
+    currentPlayer = Math.floor(Math.random() * 2) + 1;
     if (currentPlayer == 1) {
         player1.send(results.length + "play");
         player2.send("wait");

@@ -11,7 +11,7 @@ let currentlyPlaying: boolean = false;
 let buttonsPressed: number[] = [];
 let buttonOrder: number [] = [];
 let numberOfButtons: number = 4;
-let songLength: number = 16;        //variable für Songlänge
+let songLength: number = 42;        //variable für Songlänge
 let startingPart: number = 0;
 let counterDisplay: HTMLSpanElement = document.getElementById("countdown");
 let socket: WebSocket = new WebSocket("wss://guessalong.herokuapp.com/");
@@ -111,37 +111,16 @@ interface Counter {
 }
 
 async function startTimer(): Promise<void> {
-    
-    /*this.counter = { sec: 3 }; // choose whatever you want
-    let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
-      if (this.counter.sec - 1 == -1) {
-        this.counter.sec = 3;
-      } 
-      else this.counter.sec -= 1;
-      if (this.counter.sec == 0) clearInterval(intervalId);
-    }, 1000)
-    counterDisplay.innerHTML = this.counter.sec;*/
 
     background.classList.add("overlay");
     
     for (let i: number = 3; i > 0; i--) {
         counterDisplay.innerHTML = i.toString();
-        await new Promise(r => setTimeout(r, 400));
+        await new Promise(r => setTimeout(r, 1000));
     }
     background.classList.remove("overlay");
     counterDisplay.innerHTML = "";
 
-    /*let timeLeft: number = 3;
-    let countdownTimer: ReturnType<typeof setInterval> = setInterval(() => {
-        if (timeLeft <= 0) {
-            background.classList.remove("overlay");
-            counterDisplay.innerHTML = "";
-            clearInterval(countdownTimer);
-        }
-        counterDisplay.innerHTML = timeLeft.toString();
-        console.log(timeLeft);
-        timeLeft -= 1;
-        }, 500);*/
 
     
     
@@ -188,25 +167,6 @@ function overlay(): void {
 }
 
 
-
-/*function playWholeMelody(a: boolean []): void {
-    for (let i: number = 0; i <= a.length; i++) {
-     if (a[i] == true) {
-     startingPart = 0;
-     setTimeout(() => {
-        playSound("mamma_mia", i, true);
-     }, 2000);
-     
-} else {
-    setTimeout(() => {
-        console.log("pause");
-
-    } 
-    ,          200);
-}
-    }
-}*/
-
 function automaticButton(index: number): void {
     const target: HTMLElement = <HTMLElement>buttons.item(index);
     target.classList.remove("hidden");
@@ -252,8 +212,6 @@ function onButton(evt: Event): void {
         if (buttonsPressed.length >= buttonOrder.length) {
             endOfTurn();
         }
-
-        //evt.preventDefault(); // prevent mousedown emulation with iOS touch
 
     }
 
@@ -320,7 +278,7 @@ async function playRandom(order: number[]): Promise<void> {
           automaticButton(i);
           await new Promise(r => setTimeout(r, 1000));
           
-          //setInterval(() => automaticButton(i), 3000);
+          
       }
   }
 

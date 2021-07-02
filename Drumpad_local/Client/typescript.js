@@ -16,7 +16,7 @@ window.addEventListener("load", function () {
     let buttonsPressed = [];
     let buttonOrder = [];
     let numberOfButtons = 4;
-    let songLength = 16; //variable für Songlänge
+    let songLength = 42; //variable für Songlänge
     let startingPart = 0;
     let counterDisplay = document.getElementById("countdown");
     let socket = new WebSocket("wss://guessalong.herokuapp.com/");
@@ -99,33 +99,13 @@ window.addEventListener("load", function () {
     }
     function startTimer() {
         return __awaiter(this, void 0, void 0, function* () {
-            /*this.counter = { sec: 3 }; // choose whatever you want
-            let intervalId: ReturnType<typeof setInterval> = setInterval(() => {
-              if (this.counter.sec - 1 == -1) {
-                this.counter.sec = 3;
-              }
-              else this.counter.sec -= 1;
-              if (this.counter.sec == 0) clearInterval(intervalId);
-            }, 1000)
-            counterDisplay.innerHTML = this.counter.sec;*/
             background.classList.add("overlay");
             for (let i = 3; i > 0; i--) {
                 counterDisplay.innerHTML = i.toString();
-                yield new Promise(r => setTimeout(r, 400));
+                yield new Promise(r => setTimeout(r, 1000));
             }
             background.classList.remove("overlay");
             counterDisplay.innerHTML = "";
-            /*let timeLeft: number = 3;
-            let countdownTimer: ReturnType<typeof setInterval> = setInterval(() => {
-                if (timeLeft <= 0) {
-                    background.classList.remove("overlay");
-                    counterDisplay.innerHTML = "";
-                    clearInterval(countdownTimer);
-                }
-                counterDisplay.innerHTML = timeLeft.toString();
-                console.log(timeLeft);
-                timeLeft -= 1;
-                }, 500);*/
         });
     }
     function playWholeMelody(song, a) {
@@ -160,23 +140,6 @@ window.addEventListener("load", function () {
         playerMessage.id = "guess";
         playerMessage.innerHTML = "Guess the melody!";
     }
-    /*function playWholeMelody(a: boolean []): void {
-        for (let i: number = 0; i <= a.length; i++) {
-         if (a[i] == true) {
-         startingPart = 0;
-         setTimeout(() => {
-            playSound("mamma_mia", i, true);
-         }, 2000);
-         
-    } else {
-        setTimeout(() => {
-            console.log("pause");
-    
-        }
-        ,          200);
-    }
-        }
-    }*/
     function automaticButton(index) {
         const target = buttons.item(index);
         target.classList.remove("hidden");
@@ -209,7 +172,6 @@ window.addEventListener("load", function () {
             if (buttonsPressed.length >= buttonOrder.length) {
                 endOfTurn();
             }
-            //evt.preventDefault(); // prevent mousedown emulation with iOS touch
         }
     }
     function arrayEquals(a, b) {
@@ -258,7 +220,6 @@ window.addEventListener("load", function () {
             for (let i of order) {
                 automaticButton(i);
                 yield new Promise(r => setTimeout(r, 1000));
-                //setInterval(() => automaticButton(i), 3000);
             }
         });
     }
