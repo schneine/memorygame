@@ -130,6 +130,8 @@ function startTimer(): void {
     let timeLeft: number = 3;
     let countdownTimer: ReturnType<typeof setInterval> = setInterval(() => {
         if (timeLeft <= 0) {
+            background.classList.remove("overlay");
+            counterDisplay.innerHTML = "";
             clearInterval(countdownTimer);
         }
         counterDisplay.innerHTML = timeLeft.toString();
@@ -137,8 +139,8 @@ function startTimer(): void {
         timeLeft -= 1;
         }, 500);
 
-    background.classList.remove("overlay");
-    counterDisplay.innerHTML = "";
+    
+    
 
   }
 

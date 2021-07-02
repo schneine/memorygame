@@ -114,14 +114,14 @@ window.addEventListener("load", function () {
         let timeLeft = 3;
         let countdownTimer = setInterval(() => {
             if (timeLeft <= 0) {
+                background.classList.remove("overlay");
+                counterDisplay.innerHTML = "";
                 clearInterval(countdownTimer);
             }
             counterDisplay.innerHTML = timeLeft.toString();
             console.log(timeLeft);
             timeLeft -= 1;
         }, 500);
-        background.classList.remove("overlay");
-        counterDisplay.innerHTML = "";
     }
     function playWholeMelody(song, a) {
         // load audio elements
