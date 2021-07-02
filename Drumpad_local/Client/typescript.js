@@ -111,7 +111,6 @@ window.addEventListener("load", function () {
             counterDisplay.innerHTML = i.toString();
             await new Promise(r => setTimeout(r, 400));
         }*/
-        //now it should work
         let timeLeft = 3;
         let countdownTimer = setInterval(() => {
             if (timeLeft <= 0) {
@@ -121,6 +120,8 @@ window.addEventListener("load", function () {
             console.log(timeLeft);
             timeLeft -= 1;
         }, 500);
+        background.classList.remove("overlay");
+        counterDisplay.innerHTML = "";
     }
     function playWholeMelody(song, a) {
         // load audio elements
